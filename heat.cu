@@ -7,6 +7,7 @@
 #include "include/visualise.h"
 #include "include/heatkernel.h"
 #include "include/solve.h"
+#include "include/solve_parallel.h"
 
 int main()
 {
@@ -14,9 +15,9 @@ int main()
     double dx = 0.1;
     double dy = 0.1;
 
-    int nx = 200;
-    int ny = 200;
-    double t = 1;
+    int nx = 2000;
+    int ny = 2000;
+    double t = 10;
     size_t timesteps = t / dt;
 
     double* boundary = (double*) calloc(nx * ny, sizeof(double));
@@ -28,7 +29,9 @@ int main()
     auto start = std::chrono::high_resolution_clock::now();
     // solve heat equation
     //SolvePDE_explicitEuler(boundary, result, nx, ny, dx, dy, dt, timesteps);
-    SolvePDE_implicitEuler_Jacobian(boundary, result, nx, ny, dx, dy, dt, timesteps);
+    //SolvePDE_implicitEuler_Jacobian(boundary, result, nx, ny, dx, dy, dt, timesteps);
+    //SolvePDE_explicitEuler_parallel(boundary, result, nx, ny, dx, dy, dt, timesteps);
+    SolvePDE_implicitEuler_Jacobian_parallel(boundary, result, nx, ny, dx, dy, dt, timesteps);
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
     printf("Elapsed time: %f\n", elapsed.count());

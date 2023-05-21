@@ -43,7 +43,9 @@ void SolvePDE_implicitEuler_Jacobian(
     double dy, 
     double dt,
     size_t timesteps,  
-    double C = 1)
+    double C = 1, 
+    size_t MAX_JAC_ITER = 100, 
+    double eps = 1e-6)
 {
     double inv_a_ii = 1./(1 + 2*C*dt*(dx*dx + dy*dy)/(dx*dx*dy*dy));
     double* curr = (double*) malloc(Nx * Ny * sizeof(double));
@@ -63,9 +65,6 @@ void SolvePDE_implicitEuler_Jacobian(
         next_prime[j] = curr[j];
         next_prime[(Nx - 1) * Ny + j] = curr[(Nx - 1) * Ny + j];
     }
-    
-    const size_t MAX_JAC_ITER = 100;
-    double eps = 1e-6;
 
     for (size_t iter = 0; iter < timesteps; iter++)
     {

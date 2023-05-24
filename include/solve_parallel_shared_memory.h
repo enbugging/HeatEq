@@ -151,12 +151,10 @@ void SolvePDE_implicitEuler_Jacobian_parallel_shared_memory_aux(
         inv_a_ii * (
             curr[i * Ny + j] + 
             C * dt * (
-                (shared_next[(shared_i + 1) * (THREADS_PER_BLOCK + 2) + shared_j] -
-                2 * shared_next[shared_i * (THREADS_PER_BLOCK + 2) + shared_j] +
+                (shared_next[(shared_i + 1) * (THREADS_PER_BLOCK + 2) + shared_j] +
                 shared_next[(shared_i - 1) * (THREADS_PER_BLOCK + 2) + shared_j]) / (dx * dx) +
 
-                (shared_next[shared_i * (THREADS_PER_BLOCK + 2) + shared_j + 1] -
-                2 * shared_next[shared_i * (THREADS_PER_BLOCK + 2) + shared_j] +
+                (shared_next[shared_i * (THREADS_PER_BLOCK + 2) + shared_j + 1] +
                 shared_next[shared_i * (THREADS_PER_BLOCK + 2) + shared_j - 1]) / (dy * dy)
             )
         );

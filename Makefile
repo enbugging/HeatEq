@@ -19,4 +19,4 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE)
+	del heat.o heat.exp heat.lib

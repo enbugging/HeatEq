@@ -29,4 +29,34 @@ void heat_disc(
     }
 }
 
+void heat_square(
+    double* boundary, 
+    int nx, 
+    int ny)
+{
+    double radius1 = (nx/5) * (ny/5);
+    double radius2 = (nx/4) * (ny/4);
+    for (int i = nx/2 - radius1; i < nx/2 + radius1; i++)
+    {
+        for (int j = ny/2 - radius1; j < ny/2 + radius1; j++)
+        {
+            boundary[i * ny + j] = 10;
+        }
+    }
+}
+
+void multiple_random_heat_kernel(
+    double* boundary, 
+    int nx, 
+    int ny, 
+    int number_of_source = 5)
+{
+    for (int i = 0; i < number_of_source; i++)
+    {
+        int x = rand() % nx;
+        int y = rand() % ny;
+        boundary[x * ny + y] = 10;
+    }
+}
+
 #endif

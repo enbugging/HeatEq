@@ -52,13 +52,36 @@ int main(int argc, char** argv)
             ny = atoi(argv[3]);
             t = atoi(argv[4]);
             timesteps = t / dt;
-            if(atoi(argv[5]) == 1)
-                heat_disc(boundary, nx, ny);
-            else
+            if(atoi(argv[5]) == 0)
                 heat_kernel(boundary, nx, ny);
+            else if (atoi(argv[5]) == 1)
+                heat_disc(boundary, nx, ny);
+            else if (atoi(argv[5]) == 2)
+                heat_square(boundary, nx, ny);
+            else if (atoi(argv[5]) == 3)
+                multiple_random_heat_kernel(boundary, nx, ny);
+            else
+            {
+                printf("Invalid initial condition\n");
+                return 0;
+            }
+            break;
+        case 7:
+            mode = atoi(argv[1]);
+            nx = atoi(argv[2]);
+            ny = atoi(argv[3]);
+            t = atoi(argv[4]);
+            timesteps = t / dt;
+            if(atoi(argv[5]) == 3)
+                multiple_random_heat_kernel(boundary, nx, ny, atoi(argv[6]));
+            else
+            {
+                printf("Invalid initial condition\n");
+                return 0;
+            }
             break;
         default:
-            printf("Usage: ./heat [mode] [nx] [ny] [t] [initial]\n");
+            printf("Usage: ./heat [mode] [nx] [ny] [t] [initial] [number of random initials]\n");
             return 0;
     }
 

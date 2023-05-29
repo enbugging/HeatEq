@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     int nx = 2000;
     int ny = 2000;
     double t = 1;
-    int mode = 0, initial_mode = 0;
+    int mode = 0, initial_mode = 0, number_of_random_initials = 5;
     size_t timesteps = t / dt;
 
     switch(argc)
@@ -82,6 +82,17 @@ int main(int argc, char** argv)
             dt = atof(argv[7]);
             initial_mode = atoi(argv[8]);
             break;
+        case 10:
+            mode = atoi(argv[1]);
+            nx = atoi(argv[2]);
+            ny = atoi(argv[3]);
+            t = atoi(argv[4]);
+            dx = atof(argv[5]);
+            dy = atof(argv[6]);
+            dt = atof(argv[7]);
+            initial_mode = atoi(argv[8]);
+            number_of_random_initials = atoi(argv[9]);
+            break;
     }
     timesteps = t / dt;
 
@@ -96,7 +107,7 @@ int main(int argc, char** argv)
     else if (initial_mode == 2)
         heat_square(boundary, nx, ny);
     else if (initial_mode == 3)
-        multiple_random_heat_kernel(boundary, nx, ny);
+        multiple_random_heat_kernel(boundary, nx, ny, number_of_random_initials);
     else
     {
         printf("Invalid initial mode\n");

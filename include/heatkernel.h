@@ -36,9 +36,27 @@ void heat_square(
 {
     double radius1 = (nx/5) * (ny/5);
     double radius2 = (nx/4) * (ny/4);
-    for (int i = nx/2 - radius1; i < nx/2 + radius1; i++)
+    for (int i = nx/2 - nx/4; i < nx/2 - nx/5; i++)
     {
-        for (int j = ny/2 - radius1; j < ny/2 + radius1; j++)
+        for (int j = ny/2 - ny/4; j < ny/2 + ny/4; j++)
+        {
+            boundary[i * ny + j] = 10;
+        }
+    }
+    for (int i = nx/2 + nx/5; i < nx/2 + nx/4; i++)
+    {
+        for (int j = ny/2 - ny/4; j < ny/2 + ny/4; j++)
+        {
+            boundary[i * ny + j] = 10;
+        }
+    }
+    for (int i = nx/2 - nx/4; i < nx/2 + nx/4; i++)
+    {
+        for (int j = ny/2 - ny/4; j < ny/2 - ny/5; j++)
+        {
+            boundary[i * ny + j] = 10;
+        }
+        for (int j = ny/2 + ny/5; j < ny/2 + ny/4; j++)
         {
             boundary[i * ny + j] = 10;
         }

@@ -1,5 +1,5 @@
 CC := nvcc
-CFLAGS := -std=c++14 -Iinclude
+CFLAGS := -std=c++17 -Iinclude
 
 SOURCES := heat.cu include/heatmap.c include/lodepng.cpp
 OBJECTS := $(SOURCES:.cu=.o)
